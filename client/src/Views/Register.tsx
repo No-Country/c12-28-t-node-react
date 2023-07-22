@@ -3,6 +3,7 @@ import { useState } from "react"
 import NavBar from "../components/common/NavBar";
 import Footer from "../components/common/Footer";
 import TopBar from "../components/common/TopBar";
+import RegisterCompleted from "../Components/RegisterCompleted";
 
 export default function Register() {
 
@@ -26,6 +27,12 @@ export default function Register() {
     setUserForm({ ...userForm, [e.target.name]: e.target.value });
   }
 
+  const [isTrue, setIsTrue] = useState<boolean>(false)
+  
+  function getNotification () { 
+    return  <RegisterCompleted message={"¡Felicidades te has registrado satisfactoriamente! Por favor revisa tu correo para confirmar."} />
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -38,6 +45,7 @@ export default function Register() {
       if (response.status === 200) {
         const data = await response.json();
         console.log(data);
+        setIsTrue(!isTrue)
       } else {
         console.log('Error al dar de alta usuario');
       }
@@ -47,9 +55,11 @@ export default function Register() {
     }
   }
 
+
   return (
     <>
       <TopBar />
+      {isTrue && getNotification()}
 
       <div className="py-8 w-[346px] m-auto">
         <div className="rounded-sm flex flex-col justify-center items-center ">
@@ -135,7 +145,7 @@ export default function Register() {
                 <button type="submit" className="bg-tertiary-color rounded-full p-2 text-lg text-white">
                   Aceptar
                 </button>
-                f</div>
+                </div>
             </form>
           </div>
         </div>
