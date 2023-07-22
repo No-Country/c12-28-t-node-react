@@ -6,6 +6,7 @@ import Landing from "../views/Landing";
 import Products from "../views/Products";
 import Perfil from "../views/Perfil";
 import Detail from "../views/Detail";
+import CambiarContrasena from "../Views/CambiarContrasena";
 
 function Router() {
     return (
@@ -18,6 +19,7 @@ function Router() {
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/detail" element={<Detail />} />
           <Route path="/products" element={<Products/>} />
+          <Route path="/change" element={<CambiarContrasena />} />
         </Routes>
     </BrowserRouter>
     );
