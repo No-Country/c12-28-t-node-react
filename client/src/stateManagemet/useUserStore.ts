@@ -8,7 +8,7 @@ interface UserStore {
 
 export const useUserStore = create<UserStore>()(() => {
   loadUserData();
-  const loadUserDataStorage = JSON.parse(localStorage.userData  as string);
+  const loadUserDataStorage = JSON.parse(localStorage.userData as string);
   
   return ({
     userData: {
