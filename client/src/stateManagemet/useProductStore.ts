@@ -17,7 +17,7 @@ interface ProductStore {
 const searchAndSortProducts = (products: Product[], search: string) =>{
   products
     .filter(product => product.category.name.toLowerCase().includes(search.toLowerCase()))
-    .sort((a, b) => a.category.name.localeCompare(b.category.name))
+    .sort((a, b) => a.category.name.localeCompare(b.category.name))}
 
 export const useProductStore = create(persist<ProductStore>((set, get) => ({
   product: {
