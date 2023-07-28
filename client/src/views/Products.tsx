@@ -11,7 +11,7 @@ import Button from "../components/common/Button";
 
 export default function Products() {
   const products = useProductStore(state => state.searchProducts);
-  console.log(products);
+
   return (
     <>
       <TopBar />
@@ -33,7 +33,7 @@ export default function Products() {
               <ProductCard
                 key={product.idProduct}
                 id={product.idProduct}
-                img={product?.photos[0]?.name}
+                img={product.photos ? product?.photos[0]?.name : ""}
                 name={product.name}
                 description={product.description}
                 price={product.price}
