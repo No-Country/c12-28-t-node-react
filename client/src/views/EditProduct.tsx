@@ -15,6 +15,7 @@ function Detail() {
     image: null,
   });
   const [product, setProduct] = useState<Product>({
+    idProduct: 0,
     name: "",
     description: "",
     price: 0,
@@ -30,6 +31,7 @@ function Detail() {
 
   const setDefault = () => {
     setProduct({
+      idProduct: 0,
       name: "",
       description: "",
       price: 0,
@@ -44,7 +46,7 @@ function Detail() {
     setIsSelected(false);
   };
 
-  const handleUploadImage = file => {
+  const handleUploadImage = (file: any) => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append(
@@ -81,16 +83,16 @@ function Detail() {
       .catch(err => console.error(err));
   };
 
-  const handleOnSubmit = e => {
+  const handleOnSubmit = (e: any) => {
     e.preventDefault();
 
     const productCategory = categories.find(
       c => product.category.name === c.name
     );
     const idCategoryProduct = productCategory?.idCategory;
-    const userSession = localStorage.getItem("user-storage");
+    const userSession = localStorage.getItem("userData") as string;
     const userParsed = JSON.parse(userSession);
-    const idUserProduct = userParsed.state.user.idUser;
+    const idUserProduct = userParsed.idUser;
     const userProduct = { ...product, idUserProduct, idCategoryProduct };
     console.log(userProduct);
     try {
@@ -100,14 +102,15 @@ function Detail() {
         headers: {
           "Content-Type": "application/json",
         },
-      }).then(res => {
-        if (res.statusText === "OK") {
-          setDefault();
-          setIsSelected(false);
-        } else {
-          console.error(res.statusText);
-        }
-      });
+      })
+        .then(res => {
+          if (res.statusText === "OK") {
+            setDefault();
+            setIsSelected(false);
+          } else {
+            console.error(res.statusText);
+          }
+        });
     } catch (error) {
       console.error(error);
     }
@@ -160,7 +163,7 @@ function Detail() {
                 name="product-image"
                 onChange={event => {
                   setIsSelected(true);
-                  let img = event.target.files[0];
+                  const img = event.target.files ? event.target.files[0] : undefined;
                   setSelectedImage({ image: img });
                   console.log(img);
                 }}
@@ -197,7 +200,7 @@ function Detail() {
                 color="secondary-color"
                 inputId="product-price"
                 inputName="product-price"
-                value={product.price}
+                value={`${product.price}`}
                 handler={e =>
                   setProduct({
                     ...product,
@@ -325,7 +328,7 @@ function Detail() {
                 handler={e =>
                   setProduct({
                     ...product,
-                    stock: e.target.value,
+                    stock: Number(e.target.value),
                   })
                 }
               />

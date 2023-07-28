@@ -27,5 +27,6 @@ export interface Product {
     {
       name: string;
     }
-  ]
+  ];
+  [index: string]: string | number | undefined | Product["photos"] | Product["category"];
 }
