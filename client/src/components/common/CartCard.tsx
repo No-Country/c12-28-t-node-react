@@ -1,11 +1,11 @@
-import Button from "./Button";
+
 import React from "react";
 import { CartItem, useCartStore } from "../../stateManagemet/useCartStore";
 
 
 interface CartCardProps {
     cartItem: CartItem;
-    removeFromCart: (productId: number) => void;
+    removeFromCart: (idProduct: number) => void;
   }
 
  const CartCard: React.FC<CartCardProps> = ({ cartItem }) => {
@@ -15,6 +15,7 @@ interface CartCardProps {
 
     const handleRemoveItem = () => {
         removeFromCart(product.idProduct);
+        console.log("boton eliminar")
       };
 
     return (
@@ -31,7 +32,7 @@ interface CartCardProps {
           </p>
           <p className="font-medium text-secondary-color">Cantidad <span className="font-bold">{quantity}</span></p>
           <h6 className="text-secondary-color font-bold text-h4">${product.price}</h6>
-          <Button color="primary-color" onClick={handleRemoveItem}>Eliminar</Button>
+          <button className="rounded py-2 px-5 border border-primary-color text-primary-color" onClick={handleRemoveItem} >Eliminar</button>
         </div>
       </div>
     );

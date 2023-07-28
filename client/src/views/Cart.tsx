@@ -1,6 +1,5 @@
 import Footer from "../components/common/Footer";
 import CartCard from "../components/common/CartCard";
-import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TopBar from "../components/common/TopBar";
 import SideBarNav from "../components/common/SideBarNav";
@@ -8,7 +7,6 @@ import { useCartStore } from "../stateManagemet/useCartStore";
 import { SERVER_URL } from "../utils/constants";
 
 function Cart() {
-  
     const cartState = useCartStore();
         console.log(cartState.cartItems);
  
@@ -30,6 +28,10 @@ function Cart() {
         }
       };
 
+      const removeFromCart = (idProduct: number) => {
+        cartState.removeFromCart(idProduct);
+      };
+
   return (
       <>
           <TopBar />
@@ -39,7 +41,11 @@ function Cart() {
             <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8">
               <div className="w-1/2 h-auto p-4 flex flex-col space-y-4">
                 {cartState.cartItems.map((cartItem) => (
-                <CartCard key={cartItem.product.idProduct} cartItem={cartItem} />
+                <CartCard 
+                key={cartItem.product.idProduct} 
+                cartItem={cartItem}
+                removeFromCart={removeFromCart}
+                />
                 ))}
               </div>
               

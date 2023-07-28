@@ -10,20 +10,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TopBar from "../components/common/TopBar";
 import SideBarNav from "../components/common/SideBarNav";
 
+interface Producto { idProduct: number; name: string; description: string; price: number; }
+
 
 function Detail() {
   const { id } = useParams();
-  const products = useProductStore(state => state.products);
-  const product = products.find((product) => product.idProduct.toString() === id);
+  const products = useProductStore(state => state.allProducts);
+  const product: Producto = products.find((product) => product.idProduct.toString() === id);
   console.log(product);
 
+ 
 const variables= {
   name: product?.name,
   description: product?.description,
   price: product.price,
 }
 const charact = [] 
-const charactValue = [] 
+const charactValue: string[] = [];
 
 
 
