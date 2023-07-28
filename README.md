@@ -27,8 +27,13 @@ Este es una aplicación fullstack de un e-commerce multi-cliente donde tantos ve
 - Creación de cuenta de un usuario
 - Crear un nuevo producto
 - Filtrar productos por categoría
+- Agregar productos al carrito de compra
 
 ## Roles
+- Victor Ayala: Diseño UI & Desarrollador Frontend
+- Ernesto: Desarrollador Backend
+- Alondra: Diseño UI & Desarrollador Frontend
+- Elias Pereyra Gomez: Diseño UI & Desarrollador Frontend
 
 ## Deploy
 
