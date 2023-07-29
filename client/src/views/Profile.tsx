@@ -10,13 +10,13 @@ import Container from "../components/common/Container";
 import fotoUser from "../assets/foto-de-perfil.webp";
 
 function Profile() {
-  const { userData } = useUserStore(state => state);
+  const userData = useUserStore(state => state.userData);
 
   type typeSectionItemProps = {
     textLabel: string;
     inputId: string;
     inputName?: string;
-    inputValue: string;
+    inputValue: string | number;
     inputDisable: boolean;
     inputType?: string | number;
     handler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -77,7 +77,7 @@ function Profile() {
       <Container>
         <main className="max-w-[850px] mx-auto">
           <h1 className="text-h2 text-center py-5 text-primary-color font-bold">
-            Bienvenid@ {userData.firstName}
+            Bienvenid@ {userData === "Cargando..." ? "" : userData.firstName}
           </h1>
           {/* Contenedor de la sección datos de la cuenta y foto del usuario */}
           <div className="flex justify-between max-h-min">
@@ -103,13 +103,13 @@ function Profile() {
                 inputDisable={true}
                 textLabel="Nombre de usuario:"
                 inputId="userName"
-                inputValue={userData.user}
+                inputValue={userData === "Cargando..." ? userData : userData.user}
               />
               <SectionItem
                 inputDisable={true}
                 textLabel="Correo electrónico:"
                 inputId="userEmail"
-                inputValue={userData.email}
+                inputValue={userData === "Cargando..." ? userData : userData.email}
               />
             </Section>
           </div>
@@ -122,7 +122,7 @@ function Profile() {
               inputDisable={true}
               textLabel="Nombre completo:"
               inputId="userCompleteName"
-              inputValue={`${userData.firstName} ${userData.lastName}`}
+              inputValue={userData === "Cargando..." ? userData : `${userData.firstName} ${userData.lastName}`}
             />
             <SectionItem
               inputDisable={true}
@@ -134,7 +134,7 @@ function Profile() {
               inputDisable={true}
               textLabel="Teléfono:"
               inputId="userPhoneNumber"
-              inputValue={`${userData.phone}`}
+              inputValue={userData === "Cargando..." ? userData : userData.phone}
               inputType="number"
             />
             <SectionItem

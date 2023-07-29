@@ -12,7 +12,7 @@ import { useUserStore } from "../../stateManagemet/useUserStore";
 
 function SideBarNav() {
   const sideBarNavRef = useRef<HTMLElement>(null);
-  const { userData } = useUserStore(state => state);
+  const userData = useUserStore(state => state.userData)
 
   useEffect(() => {
     if (sideBarNavRef.current) {
@@ -33,8 +33,8 @@ function SideBarNav() {
           src={fotoUser}
         ></img>
         <div className="text-h3 ml-3 h-full flex-col justify-center hidden md:flex">
-          <h4 className="font-bold">{`${userData.firstName} ${userData.lastName}`}</h4>
-          <h6>{userData.email}</h6>
+          <h4 className="font-bold">{userData === "Cargando..." ? userData : `${userData.firstName} ${userData.lastName}`}</h4>
+          <h6>{userData === "Cargando..." ? userData : userData.email}</h6>
         </div>
       </div>
       <nav className="flex flex-col text-nav-items">

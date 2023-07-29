@@ -1,23 +1,48 @@
 import { create } from 'zustand'
-import loadUserData from '../utils/loadUserData';
 import { TypeUser } from '../types/types';
+import loadUserData from '../utils/loadUserData';
 
-interface UserStore {
-  userData: TypeUser;
+export interface UserStore {
+  userData: TypeUser | "Cargando...";
+  loadUserData: () => void;
 }
 
-export const useUserStore = create<UserStore>()(() => {
-  loadUserData();
-  const loadUserDataStorage = JSON.parse(localStorage.userData as string);
-  
-  return ({
-    userData: {
-      user: loadUserDataStorage.user,
-      email: loadUserDataStorage.email,
-      firstName: loadUserDataStorage.firstName,
-      lastName: loadUserDataStorage.lastName,
-      phone: loadUserDataStorage.phone,
-      role: loadUserDataStorage.role.name
-    }
+export const useUserStore = create<UserStore>()(set => {
+  type typeUserDataFromLocalStorage = {
+    email: string;
+    firstName: string;
+    idPhoto: number;
+    idUser: number;
+    idUserAddress: number;
+    lastName: string;
+    password: string;
+    phone: string;
+    role: { name: string };
+    user: string;
   }
-)});
+  return ({ 
+    userData: "Cargando...",
+    loadUserData: async () => {
+    await loadUserData()
+      .then(() => {
+        const loadUserDataFromLocalStorage = localStorage.getItem("userData");
+        if(loadUserDataFromLocalStorage){
+          const loadUserData: typeUserDataFromLocalStorage = JSON.parse(loadUserDataFromLocalStorage);
+          const newState: UserStore = { 
+            userData: {
+              email: loadUserData.email,
+              firstName: loadUserData.firstName,
+              phone: Number(loadUserData.phone),
+              lastName: loadUserData.lastName,
+              role: loadUserData.role.name,
+              user: loadUserData.user
+            }, 
+            loadUserData: () => undefined,
+          }
+          set(() => newState)
+        }
+      })
+      .catch(error => console.log(error))
+    }
+  });
+})
