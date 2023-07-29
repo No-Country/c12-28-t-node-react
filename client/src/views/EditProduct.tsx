@@ -6,7 +6,6 @@ import Input from "../components/common/Input";
 
 import { useCategoriesStore } from "../stateManagemet/useCategoriesStore";
 import { Product } from "../types/ProductType";
-import { SERVER_URL } from "../utils/constants";
 import SideBarNav from "../components/common/SideBarNav";
 
 function Detail() {
@@ -96,7 +95,7 @@ function Detail() {
     const userProduct = { ...product, idUserProduct, idCategoryProduct };
     console.log(userProduct);
     try {
-      fetch(`${SERVER_URL}/products`, {
+      fetch(`${import.meta.env.VITE_REACT_APP_SERVER_URL}/products`, {
         method: "POST",
         body: JSON.stringify(userProduct),
         headers: {

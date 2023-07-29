@@ -4,7 +4,6 @@ import axios from "axios";
 import TopBar from "../components/common/TopBar";
 import SideBarNav from "../components/common/SideBarNav";
 import { useCartStore } from "../stateManagemet/useCartStore";
-import { SERVER_URL } from "../utils/constants";
 
 function Cart() {
     const cartState = useCartStore();
@@ -16,7 +15,7 @@ function Cart() {
     const handleCheckout = async () => {
         try {
           // Envía la información del carrito y el monto total al backend para crear la orden de pago
-          const response = await axios.post(`${SERVER_URL}/create-order`, {
+          const response = await axios.post(`${import.meta.env.VITE_REACT_APP_SERVER_URL}/create-order`, {
             items: cartState.cartItems,
             totalAmount: totalPrice,
           });

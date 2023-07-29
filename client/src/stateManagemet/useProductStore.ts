@@ -1,7 +1,6 @@
 import { create } from "zustand"
 import { persist } from 'zustand/middleware'
 
-import { SERVER_URL } from "../utils/constants";
 import { Product } from "../types/ProductType";
 
 interface ProductStore {
@@ -52,6 +51,6 @@ export const useProductStore = create(persist<ProductStore>((set, get) => ({
   name: "products-storage",
 }))
 
-fetch(`${SERVER_URL}/products`)
+fetch(`${import.meta.env.VITE_REACT_APP_SERVER_URL}/products`)
   .then(res => res.json())
   .then(data => { useProductStore.getState().setProducts(data) })

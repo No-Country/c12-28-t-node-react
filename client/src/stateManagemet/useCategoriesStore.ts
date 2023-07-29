@@ -1,7 +1,4 @@
 import { create } from 'zustand'
-
-import { SERVER_URL } from '../utils/constants';
-
 interface Category {
   idCategory: number;
   name: string;
@@ -22,6 +19,6 @@ export const useCategoriesStore = create<CategoryState>((set) => ({
 
 }))
 
-fetch(`${SERVER_URL}/categories`)
+fetch(`${import.meta.env.VITE_REACT_APP_SERVER_URL}/categories`)
   .then(res => res.json())
   .then(data => useCategoriesStore.getState().setCategories(data))
