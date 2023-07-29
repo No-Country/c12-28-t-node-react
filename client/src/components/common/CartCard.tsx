@@ -10,7 +10,8 @@ interface CartCardProps {
 
  const CartCard: React.FC<CartCardProps> = ({ cartItem }) => {
     const { product, quantity } = cartItem;
-
+    console.log(quantity);
+    
     const removeFromCart = useCartStore((state) => state.removeFromCart);
 
     const handleRemoveItem = () => {
