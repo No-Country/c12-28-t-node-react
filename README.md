@@ -36,6 +36,7 @@ Este es una aplicación fullstack de un e-commerce multi-cliente donde tantos ve
 - Elias Pereyra Gomez: Diseño UI & Desarrollador Frontend
 
 ## Deploy
+https://c12-28-t-node-react-wu3w.vercel.app/
 
 [react.js]: https://img.shields.io/badge/react.js-61DAFB?style=for-the-badge&logo=react&logoColor=white
 [TypeScript]: https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white
